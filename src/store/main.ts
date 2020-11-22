@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-import { userState, userReducer } from './reducers.ts'
+import { userState, userReducer } from './reducers'
 
 export type Appstate = {
     user: userState

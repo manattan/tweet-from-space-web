@@ -2,7 +2,9 @@ import actionCreatorFactory from 'typescript-fsa'
 
 const actionCreator = actionCreatorFactory()
 
-export const userActions = {
+const userActions = {
     updateUserId: actionCreator<string>('ACTIONS_UPDATE_USERID'),
-    updateUsername: actionCreator<string>('ACTIONS_UPDATE_USERNAME')
+    updateUserName: actionCreator<string>('ACTIONS_UPDATE_USERNAME')
 }
+
+export default userActions
