@@ -16,7 +16,6 @@ export const userReducer = reducerWithInitialState(initialState)
         return Object.assign({}, state, { id })
     })
     .case(userActions.updateUserName, (state, name) => {
-        console.log('reducer通過', name)
         return Object.assign({}, state, { name })
     })
 
