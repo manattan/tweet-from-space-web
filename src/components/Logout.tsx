@@ -28,6 +28,12 @@ class Logout extends React.Component<userProps> {
         Auth.signOut().then(() =>{
             this.props.updateUserId('')
             this.props.updateUserName('')
+            // eslint-disable-next-line no-restricted-globals
+            location.reload()
+        }).catch(err=>{
+            console.error(err)
+            // eslint-disable-next-line no-restricted-globals
+            location.reload()
         })
     }
 }
