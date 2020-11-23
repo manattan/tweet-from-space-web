@@ -1,12 +1,12 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import userActions  from './actions'
 
-export interface userState {
+export interface UserState {
     id: string,
     name: string
 }
 
-const initialState:userState = {
+const initialState:UserState = {
     id: '',
     name: ''
 }
@@ -16,6 +16,7 @@ export const userReducer = reducerWithInitialState(initialState)
         return Object.assign({}, state, { id })
     })
     .case(userActions.updateUserName, (state, name) => {
+        console.log('reducer通過', name)
         return Object.assign({}, state, { name })
     })
 
