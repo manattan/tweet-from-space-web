@@ -3,6 +3,7 @@ import './App.css';
 import { connect } from 'react-redux'
 import firebase from './auth/Firebase'
 import Login from './components/Login'
+import Logout from './components/Logout'
 import 'firebase/auth'
 import { UserState } from './store/reducers'
 import { Appstate } from './store/main'
@@ -24,11 +25,9 @@ const App:React.FC<userProps> = (props: userProps) => {
         firebase.auth().getRedirectResult()
         props.updateUserId(user.uid)
         props.updateUserName(user.displayName)
-      } else {
-        console.log(null)
       }
     })
-  }, [])
+  })
 
 
   if (!props.name) {
@@ -48,6 +47,7 @@ const App:React.FC<userProps> = (props: userProps) => {
       <header className="App-header">
         <h1>宇宙からの呟きを待つんや.</h1>
         <p>Hello, {props.name}</p>
+        <Logout />
       </header>
     </div>
   );
