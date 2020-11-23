@@ -20,7 +20,7 @@ type userProps = UserState & UserActions
 class Logout extends React.Component<userProps> {
     render (){
         return (
-            <button className="button" onClick={this.logout}>Logout</button>
+            <span className="button" onClick={this.logout}>Logout</span>
         )
     }
 
