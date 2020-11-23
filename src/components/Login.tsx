@@ -28,14 +28,12 @@ class Login extends React.Component<userProps> {
 
     login = () => {
         Auth.signInWithPopup(providerTwitter).then(res => {
-            console.log(res.credential)
-            // console.log(res.additionalUserInfo)
             if (res.additionalUserInfo?.username){
                 console.log(res.additionalUserInfo.username)
                 this.props.updateUserName(res.additionalUserInfo.username)
             }
         }).catch(err=>{
-            console.log(err)
+            console.error(err)
         }) 
     }
 }
