@@ -1,14 +1,15 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import userActions  from './actions'
 
+
 export interface UserState {
     id: string,
-    name: string
+    name: string,
 }
 
 const initialState:UserState = {
     id: '',
-    name: ''
+    name: '',
 }
 
 export const userReducer = reducerWithInitialState(initialState)

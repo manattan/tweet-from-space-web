@@ -29,7 +29,6 @@ class Login extends React.Component<userProps> {
     login = () => {
         Auth.signInWithPopup(providerTwitter).then(res => {
             if (res.additionalUserInfo?.username){
-                console.log(res.additionalUserInfo.username)
                 this.props.updateUserName(res.additionalUserInfo.username)
             }
         }).catch(err=>{
@@ -46,7 +45,7 @@ function mapStateToProps(appState: Appstate) {
 function mapDispatchToProps(dispatch: Dispatch<Action<string>>){
     return {
         updateUserId: (v: string) => dispatch(userActions.updateUserId(v)),
-        updateUserName: (v: string) => dispatch(userActions.updateUserName(v))
+        updateUserName: (v: string) => dispatch(userActions.updateUserName(v)),
       };
 }
 
