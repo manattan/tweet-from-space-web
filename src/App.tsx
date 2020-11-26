@@ -5,6 +5,7 @@ import firebase from './auth/Firebase'
 import { getISSLocation } from './toServer/main'
 import Login from './components/Login'
 import Logout from './components/Logout'
+import WelcomeDM from './components/WelcomeDM'
 import 'firebase/auth'
 import { UserState, LocationState } from './store/reducers'
 import { Appstate } from './store/main'
@@ -24,11 +25,12 @@ interface LocationActions {
 type Props = UserState & UserActions & LocationState & LocationActions
 
 type location = {
-  latitude: string,
-  longitude: string
+  latitude: number,
+  longitude: number
 }
 
 const App:React.FC<Props> = (props: Props) => {
+  let isJapan = false
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.displayName && user?.uid) {
@@ -37,17 +39,22 @@ const App:React.FC<Props> = (props: Props) => {
         props.updateUserName(user.displayName)
       }
     })
-    hello()
   })
 
-  const hello = () => {
+  const getRegularly = () => {
     setInterval(async ()=> {
       if (props.name) {
-        props.updateLocation(await getISSLocation())
+        const res:any = await getISSLocation()
+        res.latitude = parseFloat(res.latitude)
+        res.longitude = parseFloat(res.longitude)
+        props.updateLocation(res)
+      }
+
+      if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
+        isJapan = true
       }
     },3000)
   }
-
   if (!props.name) {
     return (
       <div className="App">
@@ -58,16 +65,20 @@ const App:React.FC<Props> = (props: Props) => {
     </div>
     )
   }
+  else {
+    getRegularly()
     return (
       <div className="App">
         <header className="App-header">
           <h1>宇宙からの呟きを待つんや.</h1>
           <p>Hello, {props.name}</p>
           <p>ISSですが、緯度{props.location.latitude}度, 経度{props.location.longitude}度 の地点にあるわ</p>
+          <WelcomeDM isJapan={isJapan} />
           <Logout />
         </header>
       </div>
     );
+  }
 }
 
 function mapStateToProps(appState: Appstate) {

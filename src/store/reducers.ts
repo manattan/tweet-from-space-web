@@ -8,8 +8,8 @@ export interface UserState {
 
 export interface LocationState {
     location: {
-        latitude: string,
-        longitude: string
+        latitude: number,
+        longitude: number
     }
 }
 
@@ -20,8 +20,8 @@ const initialUserState:UserState = {
 
 const initialLocationState:LocationState = {
     location: {
-        latitude: '',
-        longitude: ''
+        latitude: 0,
+        longitude: 0
     } 
 }
 

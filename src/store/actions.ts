@@ -3,8 +3,8 @@ import actionCreatorFactory from 'typescript-fsa'
 const actionCreator = actionCreatorFactory()
 
 type location = {
-    longitude: string
-    latitude: string
+    longitude: number
+    latitude: number
 }
 
 const Actions = {
