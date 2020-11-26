@@ -45,7 +45,7 @@ const App:React.FC<Props> = (props: Props) => {
       if (props.name) {
         props.updateLocation(await getISSLocation())
       }
-    },300)
+    },3000)
   }
 
   if (!props.name) {
