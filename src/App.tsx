@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css';
 import { connect } from 'react-redux'
 import firebase from './auth/Firebase'
+import getISSLocation from './toServer/main'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import 'firebase/auth'
@@ -29,6 +30,10 @@ const App:React.FC<userProps> = (props: userProps) => {
     })
   })
 
+  async function hello () {
+    const res = await getISSLocation()
+    console.log(res)
+  }
 
   if (!props.name) {
     return (
@@ -45,7 +50,7 @@ const App:React.FC<userProps> = (props: userProps) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>宇宙からの呟きを待つんや.</h1>
+        <h1 onClick={hello}>宇宙からの呟きを待つんや.</h1>
         <p>Hello, {props.name}</p>
         <Logout />
       </header>
