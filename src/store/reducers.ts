@@ -1,22 +1,40 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
-import userActions  from './actions'
-
+import Actions  from './actions'
 
 export interface UserState {
     id: string,
     name: string,
 }
 
-const initialState:UserState = {
+export interface LocationState {
+    location: {
+        latitude: string,
+        longitude: string
+    }
+}
+
+const initialUserState:UserState = {
     id: '',
     name: '',
 }
 
-export const userReducer = reducerWithInitialState(initialState)
-    .case(userActions.updateUserId, (state, id) => {
+const initialLocationState:LocationState = {
+    location: {
+        latitude: '',
+        longitude: ''
+    } 
+}
+
+export const userReducer = reducerWithInitialState(initialUserState)
+    .case(Actions.updateUserId, (state, id) => {
         return Object.assign({}, state, { id })
     })
-    .case(userActions.updateUserName, (state, name) => {
+    .case(Actions.updateUserName, (state, name) => {
         return Object.assign({}, state, { name })
+    })
+
+export const locationReducer = reducerWithInitialState(initialLocationState)
+    .case(Actions.updateLocation, (state, location) => {
+        return Object.assign({},state, {location})
     })
 

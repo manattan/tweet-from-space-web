@@ -6,30 +6,29 @@ import { getISSLocation } from './toServer/main'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import 'firebase/auth'
-import { UserState } from './store/reducers'
+import { UserState, LocationState } from './store/reducers'
 import { Appstate } from './store/main'
 import { Action } from 'typescript-fsa';
 import { Dispatch } from 'redux'
-import userActions from './store/actions'
+import Actions from './store/actions'
 
 interface UserActions {
   updateUserId: (v: string) => Action<string>
   updateUserName: (v: string) => Action<string>
-  // updateUserCredential: (v:object) => Action<string> 
 }
 
-type userProps = UserState & UserActions
+interface LocationActions {
+  updateLocation: (v:location) => Action<location>
+}
+ 
+type Props = UserState & UserActions & LocationState & LocationActions
 
 type location = {
-  longitude: string,
-  latitude: string
+  latitude: string,
+  longitude: string
 }
 
-const App:React.FC<userProps> = (props: userProps) => {
-  let locations:location ={
-    latitude: '',
-    longitude: ''
-  }
+const App:React.FC<Props> = (props: Props) => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.displayName && user?.uid) {
@@ -39,14 +38,12 @@ const App:React.FC<userProps> = (props: userProps) => {
       }
     })
     hello()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
   const hello = () => {
     setInterval(async ()=> {
       if (props.name) {
-        locations = await getISSLocation()
-        console.log(locations.longitude)
+        props.updateLocation(await getISSLocation())
       }
     },300)
   }
@@ -66,7 +63,7 @@ const App:React.FC<userProps> = (props: userProps) => {
         <header className="App-header">
           <h1>宇宙からの呟きを待つんや.</h1>
           <p>Hello, {props.name}</p>
-          <p>ISSですが、緯度{locations.latitude}, 軽度{locations.longitude}</p>
+          <p>ISSですが、緯度{props.location.latitude}度, 経度{props.location.longitude}度 の地点にあるわ</p>
           <Logout />
         </header>
       </div>
@@ -74,14 +71,15 @@ const App:React.FC<userProps> = (props: userProps) => {
 }
 
 function mapStateToProps(appState: Appstate) {
-  return Object.assign({},appState.user)
+  return Object.assign({},appState.user,appState.location)
 
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action<string>>){
+function mapDispatchToProps(dispatch: Dispatch<Action<any>>){
   return {
-      updateUserId: (v: string) => dispatch(userActions.updateUserId(v)),
-      updateUserName: (v: string) => dispatch(userActions.updateUserName(v))
+      updateUserId: (v: string) => dispatch(Actions.updateUserId(v)),
+      updateUserName: (v: string) => dispatch(Actions.updateUserName(v)),
+      updateLocation: (v: location) => dispatch(Actions.updateLocation(v))
     };
 }
 

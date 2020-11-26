@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import '../App.css'
 import firebase, { providerTwitter } from '../auth/Firebase'
-import userActions from '../store/actions'
+import Actions from '../store/actions'
 import { UserState } from '../store/reducers'
 import { Appstate } from '../store/main' 
 
@@ -44,8 +44,8 @@ function mapStateToProps(appState: Appstate) {
 
 function mapDispatchToProps(dispatch: Dispatch<Action<string>>){
     return {
-        updateUserId: (v: string) => dispatch(userActions.updateUserId(v)),
-        updateUserName: (v: string) => dispatch(userActions.updateUserName(v)),
+        updateUserId: (v: string) => dispatch(Actions.updateUserId(v)),
+        updateUserName: (v: string) => dispatch(Actions.updateUserName(v)),
       };
 }
 
