@@ -35,7 +35,6 @@ export const userReducer = reducerWithInitialState(initialUserState)
 
 export const locationReducer = reducerWithInitialState(initialLocationState)
     .case(Actions.updateLocation, (state, location) => {
-        console.log(location)
         return Object.assign({},state, {location})
     })
 

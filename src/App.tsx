@@ -40,11 +40,11 @@ const App:React.FC<Props> = (props: Props) => {
         res.latitude -= 0
         res.longitude -= 0
         if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
+          console.log('日本にきたぞ!!!')
           isJapan = true
         }
         props.updateLocation(res)
         fininit = true
-        console.log(fininit)
       },3000)
     }
   }
