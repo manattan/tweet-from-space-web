@@ -8,8 +8,8 @@ export interface UserState {
 
 export interface LocationState {
     location: {
-        latitude: number,
         longitude: number
+        latitude: number,
     }
 }
 
@@ -20,8 +20,8 @@ const initialUserState:UserState = {
 
 const initialLocationState:LocationState = {
     location: {
-        latitude: 0,
-        longitude: 0
+        longitude: 0,
+        latitude: 0
     } 
 }
 
@@ -35,6 +35,7 @@ export const userReducer = reducerWithInitialState(initialUserState)
 
 export const locationReducer = reducerWithInitialState(initialLocationState)
     .case(Actions.updateLocation, (state, location) => {
+        console.log(location)
         return Object.assign({},state, {location})
     })
 

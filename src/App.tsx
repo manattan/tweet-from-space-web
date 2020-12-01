@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css';
 import { connect } from 'react-redux'
 import firebase from './auth/Firebase'
-import { getISSLocation } from './toServer/main'
+import { getISSLocation } from './API/main'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import WelcomeDM from './components/WelcomeDM'
@@ -25,12 +25,26 @@ interface LocationActions {
 type Props = UserState & UserActions & LocationState & LocationActions
 
 type location = {
-  latitude: number,
   longitude: number
+  latitude: number,
 }
 
 const App:React.FC<Props> = (props: Props) => {
   let isJapan = false
+  const getRegularly = () => {
+    setInterval(async ()=> {
+      const res:any = await getISSLocation()
+      console.log(res)
+      res.latitude -= 0
+      res.longitude -= 0
+      console.log(res)
+      props.updateLocation(res)
+      if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
+        isJapan = true
+      }
+    },5000)
+  }
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.displayName && user?.uid) {
@@ -39,22 +53,10 @@ const App:React.FC<Props> = (props: Props) => {
         props.updateUserName(user.displayName)
       }
     })
-  })
+    getRegularly()
+    console.log('uuuu')
+  }, [])
 
-  const getRegularly = () => {
-    setInterval(async ()=> {
-      if (props.name) {
-        const res:any = await getISSLocation()
-        res.latitude = parseFloat(res.latitude)
-        res.longitude = parseFloat(res.longitude)
-        props.updateLocation(res)
-      }
-
-      if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
-        isJapan = true
-      }
-    },3000)
-  }
   if (!props.name) {
     return (
       <div className="App">
@@ -66,7 +68,6 @@ const App:React.FC<Props> = (props: Props) => {
     )
   }
   else {
-    getRegularly()
     return (
       <div className="App">
         <header className="App-header">
