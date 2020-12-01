@@ -1,16 +1,21 @@
-import { createStore, combineReducers } from 'redux'
-import { UserState, userReducer, LocationState, locationReducer } from './reducers'
+import { createStore, combineReducers } from "redux";
+import {
+  UserState,
+  userReducer,
+  LocationState,
+  locationReducer,
+} from "./reducers";
 
 export type Appstate = {
-    user: UserState
-    location: LocationState
-}
+  user: UserState;
+  location: LocationState;
+};
 
 const store = createStore(
-    combineReducers<Appstate>({
-        user: userReducer,
-        location: locationReducer
-    })
-)
+  combineReducers<Appstate>({
+    user: userReducer,
+    location: locationReducer,
+  })
+);
 
-export default store
+export default store;

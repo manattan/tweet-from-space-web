@@ -1,29 +1,29 @@
-import Axios from 'axios'
-import firebase from '../auth/Firebase'
+import Axios from "axios";
+import firebase from "../auth/Firebase";
 
-const baseURL = 'http://localhost:8000/api'
-const Auth = firebase.auth()
+const baseURL = "http://localhost:8000/api";
+const Auth = firebase.auth();
 
 const instance = (token: string) => {
-    return Axios.create({
-        baseURL,
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-}
+  return Axios.create({
+    baseURL,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
-export const getISSLocation = async  () => {
-    const res = await Axios.get(`${baseURL}/locations`)
-    return res.data
-}
+export const getISSLocation = async () => {
+  const res = await Axios.get(`${baseURL}/locations`);
+  return res.data;
+};
 
 export const sendDirectMessage = async (message: any) => {
-    const token = await Auth.currentUser?.getIdToken()
-    if (token) {
-        const res = await instance(token).post(message)
-        return res
-    }
-    console.log('tokenがありません')
-    return
-}
+  const token = await Auth.currentUser?.getIdToken();
+  if (token) {
+    const res = await instance(token).post(message);
+    return res;
+  }
+  console.log("tokenがありません");
+  return;
+};
