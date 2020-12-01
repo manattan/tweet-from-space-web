@@ -8,9 +8,11 @@ type Props = ownProps
 
 class WelcomeDM extends React.Component<Props>{
     render () {
-        if (this.props.isJapan) {
+        if (!this.props.isJapan) {
             return (
-                <div></div>
+                <div>
+                    <button>ISSにメッセージを送ってみよう!</button>
+                </div>
             )
         }
         else {

@@ -31,16 +31,21 @@ type location = {
 
 const App:React.FC<Props> = (props: Props) => {
   let isJapan = false
+  let fininit = false
   const getRegularly = () => {
-    setInterval(async ()=> {
-      const res:any = await getISSLocation()
-      res.latitude -= 0
-      res.longitude -= 0
-      if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
-        isJapan = true
-      }
-      props.updateLocation(res)
-    },5000)
+    if(!fininit){
+      setInterval(async ()=> {
+        const res:any = await getISSLocation()
+        res.latitude -= 0
+        res.longitude -= 0
+        if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
+          isJapan = true
+        }
+        props.updateLocation(res)
+        fininit = true
+        console.log(fininit)
+      },1000)
+    }
   }
 
   useEffect(() => {
