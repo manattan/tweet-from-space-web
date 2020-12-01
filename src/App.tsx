@@ -45,7 +45,7 @@ const App:React.FC<Props> = (props: Props) => {
         props.updateLocation(res)
         fininit = true
         console.log(fininit)
-      },1000)
+      },3000)
     }
   }
 
