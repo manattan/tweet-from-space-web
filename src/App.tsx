@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import './App.css';
 import { connect } from 'react-redux'
@@ -32,7 +33,7 @@ type location = {
 const App:React.FC<Props> = (props: Props) => {
   let isJapan = false
   let fininit = false
-  const getRegularly = () => {
+  const getLoc = () => {
     if(!fininit){
       setInterval(async ()=> {
         const res:any = await getISSLocation()
@@ -56,7 +57,7 @@ const App:React.FC<Props> = (props: Props) => {
         props.updateUserName(user.displayName)
       }
     })
-    getRegularly()
+    getLoc()
   }, [])
 
   if (!props.name) {
