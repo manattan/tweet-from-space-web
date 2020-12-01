@@ -34,14 +34,12 @@ const App:React.FC<Props> = (props: Props) => {
   const getRegularly = () => {
     setInterval(async ()=> {
       const res:any = await getISSLocation()
-      console.log(res)
       res.latitude -= 0
       res.longitude -= 0
-      console.log(res)
-      props.updateLocation(res)
       if (20< props.location.latitude && props.location.latitude < 46 && 122< props.location.longitude && props.location.longitude< 154 ) {
         isJapan = true
       }
+      props.updateLocation(res)
     },5000)
   }
 
@@ -54,7 +52,6 @@ const App:React.FC<Props> = (props: Props) => {
       }
     })
     getRegularly()
-    console.log('uuuu')
   }, [])
 
   if (!props.name) {

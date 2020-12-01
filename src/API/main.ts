@@ -24,5 +24,6 @@ export const sendDirectMessage = async (message: any) => {
         const res = await instance(token).post(message)
         return res
     }
+    console.log('tokenがありません')
     return
 }
