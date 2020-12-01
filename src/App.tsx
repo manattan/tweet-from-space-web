@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React from 'react'
 import './App.css';
 import { connect } from 'react-redux'
 import firebase from './auth/Firebase'
@@ -49,7 +49,7 @@ const App:React.FC<Props> = (props: Props) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.displayName && user?.uid) {
         firebase.auth().getRedirectResult()
