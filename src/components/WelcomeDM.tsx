@@ -6,6 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import { sendDirectMessage } from '../API/main'
+import "../App.css";
 
 type ownProps = {
   isJapan: boolean;
@@ -45,7 +46,7 @@ const WelcomeDM: React.FC<Props> = (props: Props) => {
     return (
       <div>
         <form>
-        <Button onClick={handleOpen} color="primary">
+        <Button onClick={handleOpen} className="sendButton">
           ISSにメッセージを送ってみよう
         </Button>
         <Dialog open={open} onClose={handleClose}>
