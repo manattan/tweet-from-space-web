@@ -19,9 +19,10 @@ export const getISSLocation = async () => {
 };
 
 export const sendDirectMessage = async (message: any) => {
+  console.log(message)
   const token = await Auth.currentUser?.getIdToken();
   if (token) {
-    const res = await instance(token).post(message);
+    const res = await instance(token).post('/messages', message);
     return res;
   }
   console.log("tokenがありません");

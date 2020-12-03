@@ -22,36 +22,45 @@ const WelcomeDM: React.FC<Props> = (props: Props) => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+      setOpen(false);
   };
+
+  const isEnter = async (event: any) => {
+    if (event.keyCode === 13) {
+        await handleSubmit()
+    }
+  }
 
   const handleChange = (event:any) => {
     setMessage(event.target.value)
   }
 
-  const handleSubmit = () => {
-    sendDirectMessage(message)
-    handleClose()
+  const handleSubmit = async () => {
+      await sendDirectMessage(message)
+      alert('メッセージを送りました！')
+      handleClose()
   }
 
   if (!props.isJapan) {
     return (
       <div>
+        <form>
         <Button onClick={handleOpen} color="primary">
           ISSにメッセージを送ってみよう
         </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>メッセージを送る</DialogTitle>
           <DialogContent>
-            <TextField onChange={handleChange}/>
+            <TextField onChange={handleChange} onKeyDown={isEnter}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               閉じる
             </Button>
-            <Button onClick={handleSubmit} color="primary">送信</Button>
+            <Button onClick={handleSubmit} color="primary" type="submit">送信</Button>
           </DialogActions>
         </Dialog>
+        </form>
       </div>
     );
   } else {
