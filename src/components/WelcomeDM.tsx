@@ -37,7 +37,9 @@ const WelcomeDM: React.FC<Props> = (props: Props) => {
   }
 
   const handleSubmit = async () => {
-      await sendDirectMessage(message)
+      await sendDirectMessage({
+        message
+      })
       alert('メッセージを送りました！')
       handleClose()
   }
