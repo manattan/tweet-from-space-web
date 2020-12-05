@@ -57,7 +57,6 @@ const App: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user?.displayName && user?.uid) {
-        firebase.auth().getRedirectResult();
         props.updateUserId(user.uid);
         props.updateUserName(user.displayName);
       }
