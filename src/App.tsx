@@ -4,9 +4,8 @@ import "./App.css";
 import { connect } from "react-redux";
 import firebase from "./auth/Firebase";
 import { getISSLocation } from "./API/main";
+import Main from "./components/Main";
 import Login from "./components/Login";
-import Logout from "./components/Logout";
-import WelcomeDM from "./components/WelcomeDM";
 import "firebase/auth";
 import { UserState, LocationState } from "./store/reducers";
 import { Appstate } from "./store/main";
@@ -45,7 +44,6 @@ const App: React.FC<Props> = (props: Props) => {
           122 < props.location.longitude &&
           props.location.longitude < 154
         ) {
-          console.log("日本にきたぞ!!!");
           isJapan = true;
         }
         props.updateLocation(res);
@@ -76,16 +74,14 @@ const App: React.FC<Props> = (props: Props) => {
   } else {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>宇宙からの呟きを待つんや.</h1>
-          <p>Hello, {props.name}</p>
-          <p>
-            ISSですが、緯度{props.location.latitude}度, 経度
-            {props.location.longitude}度 の地点にあるわ
-          </p>
-          <WelcomeDM isJapan={isJapan} />
-          <Logout />
-        </header>
+        <Main
+          location={{
+            latitude: props.location.latitude,
+            longitude: props.location.longitude,
+          }}
+          name={props.name}
+          isJapan={isJapan}
+        />
       </div>
     );
   }
