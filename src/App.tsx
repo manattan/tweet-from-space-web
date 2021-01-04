@@ -2,10 +2,16 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import firebase from "./auth/Firebase";
 import { getISSLocation } from "./API/main";
 import Main from "./components/Main";
-import Login from "./components/Login";
+import PageLogin from "./components/PageLogin";
 import "firebase/auth";
 import { UserState, LocationState } from "./store/reducers";
 import { Appstate } from "./store/main";
@@ -62,29 +68,37 @@ const App: React.FC<Props> = (props: Props) => {
     getLoc();
   }, []);
 
-  if (!props.name) {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>宇宙からの呟きを待つんや.</h1>
-          <Login />
-        </header>
-      </div>
-    );
-  } else {
-    return (
-      <div className="App">
-        <Main
-          location={{
-            latitude: props.location.latitude,
-            longitude: props.location.longitude,
-          }}
-          name={props.name}
-          isJapan={isJapan}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() =>
+              props.name ? (
+                <Main
+                  location={{
+                    longitude: props.location.longitude,
+                    latitude: props.location.latitude,
+                  }}
+                  name={props.name}
+                  isJapan={isJapan}
+                />
+              ) : (
+                <Redirect to="/login" />
+              )
+            }
+          />
+          <Route
+            exact
+            path="/login"
+            render={() => (props.name ? <Redirect to="/" /> : <PageLogin />)}
+          />
+        </Switch>
+      </Router>
+    </div>
+  );
 };
 
 function mapStateToProps(appState: Appstate) {

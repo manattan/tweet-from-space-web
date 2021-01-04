@@ -16,16 +16,18 @@ type Props = {
 
 const Main: React.FC<Props> = (props: Props) => {
   return (
-    <header className="App-header">
-      <h1>宇宙からの呟きを待つんや.</h1>
-      <p>Hello, {props.name}</p>
-      <p>
-        ISSですが、緯度{props.location.latitude}度, 経度
-        {props.location.longitude}度 の地点にあるわ
-      </p>
-      <WelcomeDM isJapan={props.isJapan} />
-      <Logout />
-    </header>
+    <div className="App">
+      <header className="App-header">
+        <h1>宇宙からの呟きを待つんや.</h1>
+        <p>Hello, {props.name}</p>
+        <p>
+          ISSですが、緯度{props.location.latitude}度, 経度
+          {props.location.longitude}度 の地点にあるわ
+        </p>
+        {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
+        <Logout />
+      </header>
+    </div>
   );
 };
 
