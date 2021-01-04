@@ -98,6 +98,7 @@ const App: React.FC<Props> = (props: Props) => {
             path="/login"
             render={() => (props.name ? <Redirect to="/" /> : <PageLogin />)}
           />
+          <Route exact render={() => <Redirect to="/login" />} />
         </Switch>
       </Router>
     </div>

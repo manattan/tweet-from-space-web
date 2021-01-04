@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import CircularProgress from '@material-ui/core/CircularProgress'
+import CircularProgress from "@material-ui/core/CircularProgress";
 import WelcomeDM from "./WelcomeDM";
 import Logout from "./Logout";
 
@@ -26,9 +26,7 @@ const Main: React.FC<Props> = (props: Props) => {
   return (
     <div className="App">
       <header className="App-header">
-          {isLoading && (
-              <CircularProgress />
-          )}
+        {isLoading && <CircularProgress />}
         {!isLoading && (
           <section className="fade">
             <h1>宇宙からの呟きを待つんや.</h1>
