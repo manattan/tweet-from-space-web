@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
+import Grid from '@material-ui/core/Grid';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import WelcomeDM from "./WelcomeDM";
 import Logout from "./Logout";
@@ -26,15 +27,13 @@ const Main: React.FC<Props> = (props: Props) => {
   return (
     <div className="App">
       <header className="App-header">
-        {isLoading && <CircularProgress />}
+        {isLoading && <CircularProgress style={{margin: 'auto'}}/>}
         {!isLoading && (
           <section className="fade">
-            <h1>宇宙からの呟きを待つんや.</h1>
-            <p>Hello, {props.name}</p>
-            <p>
-              ISSですが、緯度{props.location.latitude}度, 経度
-              {props.location.longitude}度 の地点にあるわ
-            </p>
+            <Grid container>
+                <Grid item xs={6}>rrr</Grid>
+                <Grid item xs={6}>dss</Grid>
+            </Grid>
             {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
             <Logout />
           </section>
