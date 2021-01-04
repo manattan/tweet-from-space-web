@@ -46,3 +46,15 @@
   position: relative;
   top:5px
 }
+
+.fade{
+  animation: fadeIn 1s ease 0s;
+}
+
+@keyframes fadeIn { /*animetion-nameで設定した値を書く*/
+
+  0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
+
+  100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
+
+}

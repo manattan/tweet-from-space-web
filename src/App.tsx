@@ -38,6 +38,7 @@ type location = {
 const App: React.FC<Props> = (props: Props) => {
   let isJapan = false;
   let fininit = false;
+  let startFade = false;
   const getLoc = () => {
     if (!fininit) {
       setInterval(async () => {
@@ -65,6 +66,7 @@ const App: React.FC<Props> = (props: Props) => {
         props.updateUserName(user.displayName);
       }
     });
+    startFade = true;
     getLoc();
   }, []);
 
@@ -84,6 +86,7 @@ const App: React.FC<Props> = (props: Props) => {
                   }}
                   name={props.name}
                   isJapan={isJapan}
+                  startFade={startFade}
                 />
               ) : (
                 <Redirect to="/login" />
