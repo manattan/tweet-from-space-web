@@ -5,7 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import { sendDirectMessage } from "../API/main";
+// import { sendDirectMessage } from "../API/main";
 import "../App.css";
 
 type ownProps = {
@@ -37,10 +37,10 @@ const WelcomeDM: React.FC<Props> = (props: Props) => {
   };
 
   const handleSubmit = async () => {
-    await sendDirectMessage({
-      message,
-    });
-    alert("メッセージを送りました！");
+    window.open(`https://twitter.com/share?url=https://space.manattan.me&text=@Space_Station ${message}`,'_blank')
+    // await sendDirectMessage({
+    //   message,
+    // });
     handleClose();
   };
 

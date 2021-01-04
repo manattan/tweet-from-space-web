@@ -48,7 +48,9 @@ const Main: React.FC<Props> = (props: Props) => {
               <Grid item xs={1} />
             </Grid>
             {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
+            <div style={{marginTop:'40px'}}>
             <Logout />
+            </div>
           </section>
         )}
       </header>
