@@ -32,7 +32,7 @@ const Main: React.FC<Props> = (props: Props) => {
         {!isLoading && (
           <section className="fade">
             <Grid container>
-            <Grid item xs={1} />
+              <Grid item xs={1} />
               <Grid item xs={5}>
                 <ShowLocation
                   location={props.location.latitude}
