@@ -32,18 +32,20 @@ const Main: React.FC<Props> = (props: Props) => {
         {!isLoading && (
           <section className="fade">
             <Grid container>
-              <Grid item xs={6}>
+            <Grid item xs={1} />
+              <Grid item xs={5}>
                 <ShowLocation
                   location={props.location.latitude}
                   displayName={"緯度"}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <ShowLocation
                   location={props.location.longitude}
                   displayName={"経度"}
                 />
               </Grid>
+              <Grid item xs={1} />
             </Grid>
             {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
             <Logout />
