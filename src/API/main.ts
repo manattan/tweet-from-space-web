@@ -1,7 +1,7 @@
 import Axios from "axios";
 import firebase from "../auth/Firebase";
 
-const baseURL = "http://localhost:8000/api";
+const baseURL = "https://space-server2021.herokuapp.com/api";
 const Auth = firebase.auth();
 
 const instance = (token: string) => {
