@@ -37,7 +37,10 @@ const WelcomeDM: React.FC<Props> = (props: Props) => {
   };
 
   const handleSubmit = async () => {
-    window.open(`https://twitter.com/share?url=https://space.manattan.me&text=@Space_Station ${message}`,'_blank')
+    window.open(
+      `https://twitter.com/share?url=https://space.manattan.me&text=@Space_Station ${message}`,
+      "_blank"
+    );
     // await sendDirectMessage({
     //   message,
     // });
