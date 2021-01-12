@@ -4,14 +4,14 @@ const styles = {
 };
 
 const h1Styles = {
-  marginTop: 200,
-  fontSize: '120%'
+  marginTop: 180,
+  fontSize: "120%",
 };
 
 const MainHeader: React.FC = () => {
   return (
     <div style={{ ...styles }}>
-        <h1 style={{...h1Styles}}>現在の国際宇宙ステーション</h1>
+      <h1 style={{ ...h1Styles }}>現在の国際宇宙ステーション</h1>
     </div>
   );
 };

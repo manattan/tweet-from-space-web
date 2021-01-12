@@ -7,6 +7,7 @@ import WelcomeDM from "./WelcomeDM";
 import Logout from "./Logout";
 import TweetComponent from "./TweetComponent";
 import MainHeader from "./MainHeader";
+import RouteToMap from "./RouteToMap";
 
 type location = {
   longitude: number;
@@ -50,6 +51,7 @@ const Main: React.FC<Props> = (props: Props) => {
               </Grid>
               <Grid item xs={1} />
             </Grid>
+            <RouteToMap />
             {!props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
             <div style={{ marginTop: "40px" }}>
               <Logout />

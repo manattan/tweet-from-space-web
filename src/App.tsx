@@ -12,6 +12,7 @@ import firebase from "./auth/Firebase";
 import { getISSLocation } from "./API/main";
 import Main from "./components/Main";
 import PageLogin from "./components/PageLogin";
+import Map from "./components/Map";
 import "firebase/auth";
 import { UserState, LocationState } from "./store/reducers";
 import { Appstate } from "./store/main";
@@ -92,6 +93,11 @@ const App: React.FC<Props> = (props: Props) => {
                 <Redirect to="/login" />
               )
             }
+          />
+          <Route
+            exact
+            path="/map"
+            render={() => (props.name ? <Map /> : <Redirect to="/login" />)}
           />
           <Route
             exact
