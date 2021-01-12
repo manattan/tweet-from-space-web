@@ -5,6 +5,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import ShowLocation from "./ShowLocation";
 import WelcomeDM from "./WelcomeDM";
 import Logout from "./Logout";
+import TweetComponent from "./TweetComponent";
+import MainHeader from "./MainHeader";
 
 type location = {
   longitude: number;
@@ -31,6 +33,7 @@ const Main: React.FC<Props> = (props: Props) => {
         {isLoading && <CircularProgress style={{ margin: "auto" }} />}
         {!isLoading && (
           <section className="fade">
+            <MainHeader />
             <Grid container>
               <Grid item xs={1} />
               <Grid item xs={5}>
@@ -47,10 +50,11 @@ const Main: React.FC<Props> = (props: Props) => {
               </Grid>
               <Grid item xs={1} />
             </Grid>
-            {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
+            {!props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
             <div style={{ marginTop: "40px" }}>
               <Logout />
             </div>
+            <TweetComponent />
           </section>
         )}
       </header>
