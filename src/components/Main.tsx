@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import "../App.css";
+import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ShowLocation from "./ShowLocation";
@@ -8,31 +10,41 @@ import Logout from "./Logout";
 import TweetComponent from "./TweetComponent";
 import MainHeader from "./MainHeader";
 import RouteToMap from "./RouteToMap";
+import { Action } from "typescript-fsa";
+import { LoadingState } from "../store/reducers";
+import { Appstate } from "../store/main"
+import { Dispatch } from "redux";
+import Actions from "../store/actions";
 
 type location = {
   longitude: number;
   latitude: number;
 };
 
-type Props = {
+type props = {
   location: location;
   name: string;
   isJapan: boolean;
   startFade: boolean;
 };
 
+type LoadingActions = {
+  updateLoading: (v:boolean) => Action<boolean>
+}
+
+type Props = props & LoadingActions & LoadingState
+
 const Main: React.FC<Props> = (props: Props) => {
-  const [isLoading, set] = useState(true);
   useEffect(() => {
     setTimeout(() => {
-      set(false);
+      props.updateLoading(false)
     }, 2000);
   }, []);
   return (
     <div className="App">
       <header className="App-header">
-        {isLoading && <CircularProgress style={{ margin: "auto" }} />}
-        {!isLoading && (
+        {props.isLoading && <CircularProgress style={{ margin: "auto" }} />}
+        {!props.isLoading && (
           <section className="fade">
             <MainHeader />
             <Grid container>
@@ -64,4 +76,14 @@ const Main: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Main;
+function mapStateToProps(appState:Appstate) {
+  return Object.assign({}, appState.isLoading);
+}
+
+function mapDispatchToProps(dispatch: Dispatch<Action<boolean>>) {
+  return {
+    updateLoading: (v:boolean) => dispatch(Actions.updateLoading(v))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

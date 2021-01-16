@@ -13,6 +13,10 @@ export interface LocationState {
   };
 }
 
+export interface LoadingState {
+  isLoading: boolean
+}
+
 const initialUserState: UserState = {
   id: "",
   name: "",
@@ -25,12 +29,16 @@ const initialLocationState: LocationState = {
   },
 };
 
+const initialLoadingState: LoadingState = {
+  isLoading: true
+}
+
 export const userReducer = reducerWithInitialState(initialUserState)
   .case(Actions.updateUserId, (state, id) => {
-    return Object.assign({}, state, { id });
+    return Object.assign(state, { id });
   })
   .case(Actions.updateUserName, (state, name) => {
-    return Object.assign({}, state, { name });
+    return Object.assign(state, { name });
   });
 
 export const locationReducer = reducerWithInitialState(
@@ -38,3 +46,7 @@ export const locationReducer = reducerWithInitialState(
 ).case(Actions.updateLocation, (state, location) => {
   return Object.assign({}, state, { location });
 });
+
+export const loadingReducer = reducerWithInitialState(initialLoadingState).case(Actions.updateLoading, (state) => {
+  return Object.assign(state, {isLoading: false} )
+})

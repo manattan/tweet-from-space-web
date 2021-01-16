@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { Link } from "react-router-dom";
+
 const RouteToMap: React.FC = () => {
   return (
     <div style={{ height: 80 }}>
