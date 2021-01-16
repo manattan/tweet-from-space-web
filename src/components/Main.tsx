@@ -12,7 +12,7 @@ import MainHeader from "./MainHeader";
 import RouteToMap from "./RouteToMap";
 import { Action } from "typescript-fsa";
 import { LoadingState } from "../store/reducers";
-import { Appstate } from "../store/main"
+import { Appstate } from "../store/main";
 import { Dispatch } from "redux";
 import Actions from "../store/actions";
 
@@ -29,15 +29,15 @@ type props = {
 };
 
 type LoadingActions = {
-  updateLoading: (v:boolean) => Action<boolean>
-}
+  updateLoading: (v: boolean) => Action<boolean>;
+};
 
-type Props = props & LoadingActions & LoadingState
+type Props = props & LoadingActions & LoadingState;
 
 const Main: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     setTimeout(() => {
-      props.updateLoading(false)
+      props.updateLoading(false);
     }, 2000);
   }, []);
   return (
@@ -64,7 +64,7 @@ const Main: React.FC<Props> = (props: Props) => {
               <Grid item xs={1} />
             </Grid>
             <RouteToMap />
-            {!props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
+            {props.isJapan && <WelcomeDM isJapan={props.isJapan} />}
             <div style={{ marginTop: "40px" }}>
               <Logout />
             </div>
@@ -76,13 +76,13 @@ const Main: React.FC<Props> = (props: Props) => {
   );
 };
 
-function mapStateToProps(appState:Appstate) {
+function mapStateToProps(appState: Appstate) {
   return Object.assign({}, appState.isLoading);
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<boolean>>) {
   return {
-    updateLoading: (v:boolean) => dispatch(Actions.updateLoading(v))
+    updateLoading: (v: boolean) => dispatch(Actions.updateLoading(v)),
   };
 }
 

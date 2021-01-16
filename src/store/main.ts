@@ -5,20 +5,20 @@ import {
   LocationState,
   locationReducer,
   LoadingState,
-  loadingReducer
+  loadingReducer,
 } from "./reducers";
 
 export type Appstate = {
   user: UserState;
   location: LocationState;
-  isLoading: LoadingState
+  isLoading: LoadingState;
 };
 
 const store = createStore(
   combineReducers<Appstate>({
     user: userReducer,
     location: locationReducer,
-    isLoading: loadingReducer
+    isLoading: loadingReducer,
   })
 );
 
